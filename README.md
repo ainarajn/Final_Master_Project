@@ -278,7 +278,7 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 
 **Conditions**: This process is only applied for **PALM** analysis Script: relate\_and\_snp\_likelihood\_hg38.sh
 
-**PALM** 
+## **PALM** 
 
 **Input**: 
 

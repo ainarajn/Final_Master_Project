@@ -137,7 +137,7 @@ This script intends to create a new file that contains each possible pairwise co
 
 This  script  prepares  the  GWAS  for  the  genetic  correlation  of  the  LDSC.  It  removes  some columns, renames and orders them.
 
-It is necessary: <https://github.com/bulik/ldsc> (munge\_sumstats has been modified) 
+It is necessary: <https://github.com/bulik/ldsc> (munge\_sumstats has been modified -> munge_sumstats_modified.py) 
 
 **Input**: 
 
@@ -175,7 +175,7 @@ This script implements LDSC (2 to 3 version) to obtain the genetic correlation b
 
 **Process status:** DONE 
 
-This script  intends to intersect the filtered GWAS SNPs with the SNPs present in Relate. After that, it only retains the SNP with the highest p-value per LD block 
+This script  intends to intersect the filtered GWAS SNPs with the SNPs present in Relate. After that, it only retains the SNP with the highest p-value per LD block.
 
 **Input**: 
 
@@ -274,6 +274,8 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 
 This script iterates over each row of the provided batch of SNPs and obtains the SNP likelihood.
 
+It is necessary: <https://github.com/MyersGroup/relate.git> (SampleBranchLengths.sh has been modified -> SampleBranchLengths_custom.sh)
+
 **Input**: 
 
 1. batch\_{num}\_ merged\_SNPs.tsv [Trim\_SNP Output Flatten]
@@ -293,6 +295,8 @@ If the genome version is **hg19** then we use relate\_and\_snp\_likelihood.sh, a
 **Process status:** REVIEW LikDir
 
 This script analyse individual traits and infer the direction and intensity of selection.
+
+It is necessary: <https://github.com/andersonwinkler/PALM.git> (palm.py has been modified -> palm_custom.py)
 
 **Input**: 
 
@@ -315,6 +319,8 @@ This script analyse individual traits and infer the direction and intensity of s
 **Process status:** REVIEW LikDir
 
 This script analyse two genetically correlated traits and infer the direction and intensity of selection.
+
+It is necessary: <https://github.com/andersonwinkler/PALM.git> (palm.py has been modified -> palm_custom.py)
 
 **Input**: 
 

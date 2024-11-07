@@ -1,4 +1,4 @@
-This file represents the structure of the Nextflow script. It is not perfectly accurate to the final script because it does not contain all the necessary parameters needed from the scripts that are pending from adjustment.
+This file represents the structure of the Nextflow script. It is not perfectly accurate to the final script because it does not contain all the necessary parameters needed from the scripts that are pending from adjustment. In addition, the input and output names are not accurate but I put them like that to give an idea of each file.
 
 # PARAMETERS 
 

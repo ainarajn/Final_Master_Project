@@ -21,7 +21,7 @@ This file represents the structure of the Nextflow script. It is not perfectly a
 
 ## **Unlist** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script takes the GWAS list and stores the name of each GWAS in a separate file. This allows Nextflow to parallelize the following processes. 
 
@@ -37,7 +37,7 @@ This script takes the GWAS list and stores the name of each GWAS in a separate f
 
 ## **GWAS\_format**  
 
-**Process status:** REVIEW – functions related to obtain ref and alt allele.
+**Script status:** REVIEW – functions related to obtain ref and alt allele.
 
 It  makes  the  GWAS  input  more  flexible  in  order  to  obtain  as  output  the  GWAS  with  the information of interest  for downstream analysis  and an established format. In addition, we select the SNPs from chr1:22 and with a p-value below the maxim p-value (Max\_pvalue). 
 
@@ -58,7 +58,7 @@ This script currently handles txt, tsv, csv and vcf GWAS file types or gz/bgz ve
 
 ## **LD\_blocks** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 It intends to add the LD\_block information in order to determine  if we continue to apply the downstream analysis based on the number of di erent LD blocks with significant SNPs. 
 
@@ -76,7 +76,7 @@ It intends to add the LD\_block information in order to determine  if we continu
 
 ## **LiftOver** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 It creates a BED-formatted file for each selected SNPs from the GWAS file. Then executes the LiftOver tool and it substitutes the position in the GWAS with the new coordinates (hg19 to hg38).
 
@@ -97,7 +97,7 @@ It creates a BED-formatted file for each selected SNPs from the GWAS file. Then 
 
 ## **Obtain\_N\_Comparisons** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script creates a file with the GWAS that have >=25 independent SNPs from all arguments passed and calculates the number of pairwise comparisons. 
 
@@ -115,7 +115,7 @@ This script creates a file with the GWAS that have >=25 independent SNPs from al
 
 ## **Obtain\_Pairs\_batch** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script intends to create a new file that contains each possible pairwise comparison in the GWAS list provided. 
 
@@ -153,7 +153,7 @@ It is necessary: <https://github.com/bulik/ldsc> (munge\_sumstats has been modif
 
 ## **Genetic\_Correlation** 
 
-**Process status:** PENDING ADJUSTMENTS 
+**Script status:** PENDING ADJUSTMENTS 
 
 This script implements LDSC (2 to 3 version) to obtain the genetic correlation between two GWAS traits. It is necessary: <https://github.com/bulik/ldsc>
 
@@ -173,7 +173,7 @@ This script implements LDSC (2 to 3 version) to obtain the genetic correlation b
 
 ## **SNP\_selection** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script  intends to intersect the filtered GWAS SNPs with the SNPs present in Relate. After that, it only retains the SNP with the highest p-value per LD block.
 
@@ -194,7 +194,7 @@ This script  intends to intersect the filtered GWAS SNPs with the SNPs present i
 
 ## **SNP\_selection\_JPALM** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script intends to intersect the filtered GWAS SNPs with the SNPs present in Relate. After that, it only retains the SNP with the highest p-value per LD block. 
 
@@ -215,7 +215,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 ## **SNP\_selection\_JPALM\_hg38** 
 
-**Process status:** DONE 
+**Script status:** DONE 
 
 This script intends to intersect the filtered GWAS SNPs with the SNPs present in Relate. After that, it only retains the SNP with the highest p-value per LD block. 
 
@@ -237,7 +237,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 ## **Merge\_SNPs** 
 
-**Process status:** REVIEW column that determines the sort order. 
+**Script status:** REVIEW column that determines the sort order. 
 
 **Input**: 
 
@@ -251,7 +251,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 ## **Trim\_SNP** 
 
-**Process status:** REVIEW p-value columns. 
+**Script status:** REVIEW p-value columns. 
 
 This script not only trims SNPs by its p-value but  also separates each SNP so that they can be processed in future steps. This is incredibly helpful to avoid unnecessary sampling branch lengths and inferring SNPs likelihoods that will not be used later on.
 
@@ -270,7 +270,7 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 
 ## **Relate\_and\_SNP\_Likelihood** 
 
-**Process status:** PENDING ADJUSTMENTS 
+**Script status:** PENDING ADJUSTMENTS 
 
 This script iterates over each row of the provided batch of SNPs and obtains the SNP likelihood.
 
@@ -292,7 +292,7 @@ If the genome version is **hg19** then we use relate\_and\_snp\_likelihood.sh, a
 
 ## **Marginal\_PALM** 
 
-**Process status:** REVIEW LikDir
+**Script status:** REVIEW LikDir
 
 This script analyse individual traits and infer the direction and intensity of selection.
 
@@ -316,7 +316,7 @@ It is necessary: <https://github.com/andersonwinkler/PALM.git> (palm.py has been
 
 ## **JOINT\_PALM** 
 
-**Process status:** REVIEW LikDir
+**Script status:** REVIEW LikDir
 
 This script analyse two genetically correlated traits and infer the direction and intensity of selection.
 

@@ -1,4 +1,4 @@
-This file represents the structure of the Nextflow script. It is not perfectly accurate to the final script because it does not contain all the necessary parameters needed from the scripts that are pending from adjustment. In addition, the input and output names are not accurate but I put them like that to give an idea of each file.
+This file represents the structure of the Nextflow script. It is not perfectly accurate to the final script because it does not contain all the required parameters needed for the scripts that are pending from adjustment. In addition, the input and output names are not accurate but I chose that description as to illustrate the intended files.
 
 # PARAMETERS 
 
@@ -272,18 +272,62 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 
 **Process status:** PENDING ADJUSTMENTS 
 
-**Input**: 
-
-**Output**: 
-
-**Conditions**: This process is only applied for **PALM** analysis Script: relate\_and\_snp\_likelihood\_hg38.sh
-
-## **PALM** 
+This script iterates over each row of the provided batch of SNPs and obtains the SNP likelihood.
 
 **Input**: 
 
+1. batch\_{num}\_ merged\_SNPs.tsv [Trim\_SNP Output Flatten]
+2. Likdir
+3. Population
+
 **Output**: 
+
+- bp{bp}.quad_fit.npy
 
 **Script**: 
 
-If the analysis type is **PALM** then we use palm.sh script, and if it is **JPALM** we** apply jpalm.sh** 
+If the genome version is **hg19** then we use relate\_and\_snp\_likelihood.sh, and if it is **hg38** we apply relate\_and\_snp\_likelihood\_hg38.sh
+
+## **Marginal\_PALM** 
+
+**Process status:** REVIEW LikDir
+
+This script analyse individual traits and infer the direction and intensity of selection.
+
+**Input**: 
+
+  val ready [Relate\_and\_SNP\_Likelihood Output Collected]
+1. {GWAS}\_selected\_SNPs.tsv [SNP\_selection Output]
+2. LikDir
+3. Max\_pvalue
+
+**Output**: 
+
+- {GWAS}_marginal_PALM.txt
+
+**Condition**: This process is only applied for **PALM** analysis
+
+**Script**: palm.sh script
+
+
+## **JOINT\_PALM** 
+
+**Process status:** REVIEW LikDir
+
+This script analyse two genetically correlated traits and infer the direction and intensity of selection.
+
+**Input**: 
+
+  val ready [Relate\_and\_SNP\_Likelihood Output Collected]
+1. {GWAS}\_selected\_SNPs.tsv [SNP\_selection\_JPALM / SNP\_selection\_JPALM\_hg38 Output]
+2. LikDir
+3. Max\_pvalue
+
+**Output**: 
+
+-  {GWAS}_J_PALM.txt
+-  {GWAS}_significant_independent_SNPs.txt
+
+**Condition**: This process is only applied for **JPALM** analysis
+
+**Script**: jpalm.sh

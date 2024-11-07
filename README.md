@@ -155,7 +155,9 @@ It is necessary: <https://github.com/bulik/ldsc> (munge\_sumstats has been modif
 
 **Script status:** PENDING ADJUSTMENTS 
 
-This script implements LDSC (2 to 3 version) to obtain the genetic correlation between two GWAS traits. It is necessary: <https://github.com/bulik/ldsc>
+This script implements LDSC (2 to 3 version) to obtain the genetic correlation between two GWAS traits. 
+
+It is necessary: <https://github.com/bulik/ldsc>
 
 **Input**: 
 

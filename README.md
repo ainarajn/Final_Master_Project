@@ -133,7 +133,7 @@ This script intends to create a new file that contains each possible pairwise co
 
 ## **munge\_sumstats** 
 
-**Process  status:** PENDING ADJUSTMENTS 
+**Script status:** PENDING ADJUSTMENTS 
 
 This  script  prepares  the  GWAS  for  the  genetic  correlation  of  the  LDSC.  It  removes  some columns, renames and orders them.
 

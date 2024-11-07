@@ -4,7 +4,7 @@ This file represents the structure of the Nextflow script. It is not perfectly a
 
   - GWAS\_List: txt file that contains the name of GWAS files (all the GWAS have to be previously downloaded).  
   - GWASdir: Path to the directory where the downloaded GWAS files are located. 
-  - GWASdir\_hg38: Path to the dire 
+  - GWASdir\_hg38: Path to the directory
   - genome = “hg19” (default) // “hg38” 
   - analysis = “PALM” (default) // “JPALM” 
   - Population. 

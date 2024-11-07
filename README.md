@@ -292,7 +292,7 @@ It is necessary: <https://github.com/MyersGroup/relate.git> (SampleBranchLengths
 
 If the genome version is **hg19** then we use relate\_and\_snp\_likelihood.sh, and if it is **hg38** we apply relate\_and\_snp\_likelihood\_hg38.sh
 
-## **Marginal\_PALM** 
+## **marginal\_PALM** 
 
 **Script status:** REVIEW LikDir
 
@@ -316,7 +316,7 @@ It is necessary: <https://github.com/andersonwinkler/PALM.git> (palm.py has been
 **Script**: palm.sh script
 
 
-## **JOINT\_PALM** 
+## **joint\_PALM** 
 
 **Script status:** REVIEW LikDir
 
@@ -339,3 +339,5 @@ It is necessary: <https://github.com/andersonwinkler/PALM.git> (palm.py has been
 **Condition**: This process is only applied for **JPALM** analysis
 
 **Script**: jpalm.sh
+
+# WORKFLOW

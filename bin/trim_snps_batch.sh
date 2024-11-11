@@ -8,7 +8,7 @@ INPUT=$1
 #Define the max p-value
 MAXP=$2
 #Degine genome version
-GENOME="$3"
+ANALYSIS="$3"
 # Create a temporary file
 TMP=TMP.txt
 
@@ -18,7 +18,7 @@ tail -n +2 "$INPUT" | \
 # avoid unnecessary sampling branch lengths and inferring SNPs
 # likelihoods that will not be used later on. Keep those with
 # p-val <= 5e-8.
-if [[ "$GENOME" == "hg38" ]]; then
+if [[ "$ANALYSIS" == "JPALM" ]]; then
     awk -F'\t' -v maxp="$MAXP" '($10 <= maxp) || ($15 <= maxp)' > "$TMP"
 else
     awk -F'\t' -v maxp="$MAXP" '($10 <= maxp)' > "$TMP"

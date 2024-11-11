@@ -8,7 +8,7 @@ INPUT=$1
 #Define the max p-value
 MAXP=$2
 #Degine genome version
-ANALYSIS="$3"
+ANALYSIS="$4"
 # Create a temporary file
 TMP=TMP.txt
 

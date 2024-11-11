@@ -147,7 +147,7 @@ It is necessary: <https://github.com/bulik/ldsc> (munge\_sumstats has been modif
 
 - {GWAS}.sumstats.info 
 
-**Conditions**: This process is only applied for  **JPALM** analysis and if the number of LDblocks obtained on **LDblock\_filter** is above the minimum established (Min\_LDblocks).
+**Conditions**: This process is only applied for **JPALM** analysis and if the number of LDblocks obtained on **LDblock\_filter** is above the minimum established (Min\_LDblocks).
 
 **Script**: munge\_ukbb\_sumstats.sh
 
@@ -190,7 +190,7 @@ This script  intends to intersect the filtered GWAS SNPs with the SNPs present i
 
 - {GWAS}\_selected\_SNPs.tsv 
 
-**Conditions**: This process is only applied for  **PALM** analysis and if the number of LDblocks obtained on **LDblock\_filter** is above the minimum established (Min\_LDblocks).
+**Conditions**: This process is only applied for **PALM** analysis and if the number of LDblocks obtained on **LDblock\_filter** is above the minimum established (Min\_LDblocks).
 
 **Script**: snp\_selection.R 
 
@@ -262,13 +262,15 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 1. merged\_SNPs.tsv [Merge\_SNPs Output] 
 2. Max\_pvalue 
 3. N\_per\_batch 
-4. genome 
+4. analysis 
 
 **Output**: 
 
 - batch\_{num}\_ merged\_SNPs.tsv 
 
-**Script**: trim\_snps\_batch.sh
+**Script**: 
+
+If the analysis type is **PALM** then we use trim\_snps\_batch.sh, and if it is **JPALM** we apply trim_snps_batch_jpalm.sh
 
 ## **Relate\_and\_SNP\_Likelihood** 
 
@@ -283,6 +285,7 @@ It is necessary: <https://github.com/MyersGroup/relate.git> (SampleBranchLengths
 1. batch\_{num}\_ merged\_SNPs.tsv [Trim\_SNP Output Flatten]
 2. Likdir
 3. Population
+4. genome
 
 **Output**: 
 

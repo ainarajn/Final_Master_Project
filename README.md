@@ -268,9 +268,7 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 
 - batch\_{num}\_ merged\_SNPs.tsv 
 
-**Script**: 
-
-If the analysis type is **PALM** then we use trim\_snps\_batch.sh, and if it is **JPALM** we apply trim_snps_batch_jpalm.sh
+**Script**: trim\_snps\_batch.sh
 
 ## **Relate\_and\_SNP\_Likelihood** 
 

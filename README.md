@@ -239,7 +239,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 ## **Merge\_SNPs** 
 
-**Script status:** REVIEW column that determines the sort order. 
+**Script status:** DONE
 
 **Input**: 
 
@@ -253,7 +253,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 ## **Trim\_SNP** 
 
-**Script status:** REVIEW p-value columns. 
+**Script status:** DONE
 
 This script not only trims SNPs by its p-value but  also separates each SNP so that they can be processed in future steps. This is incredibly helpful to avoid unnecessary sampling branch lengths and inferring SNPs likelihoods that will not be used later on.
 

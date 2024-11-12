@@ -37,7 +37,7 @@ This script takes the GWAS list and stores the name of each GWAS in a separate f
 
 ## **GWAS\_format**  
 
-**Script status:** REVIEW – functions related to obtain ref and alt allele.
+**Script status:** REVIEW
 
 It  makes  the  GWAS  input  more  flexible  in  order  to  obtain  as  output  the  GWAS  with  the information of interest  for downstream analysis  and an established format. In addition, we select the SNPs from chr1:22 and with a p-value below the maxim p-value (Max\_pvalue). 
 
@@ -54,7 +54,7 @@ This script currently handles txt, tsv, csv and vcf GWAS file types or gz/bgz ve
 
 - format\_{GWAS}.tsv 
 
-**Script**: gwas\_format.R
+**Script**: gwas\_format.R (There is a second script, REVIEW_gwas_format2.R, which includes additional inputs and needs to be reviewed and verified to ensure it functions correctly in order to assess which one is better.)
 
 ## **LD\_blocks** 
 

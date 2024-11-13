@@ -49,7 +49,7 @@ change_headers <- function(data) {
   chr <- c("^(chr|chromosome|chrom|snp-chr|chr_ID)$")
   pos <- c("^(pos|base_pair_location|snppos|snp_pos|bp|position|chr_pos)$")
   z <- c("^(z|zscore|z-score|GC_zscore|tstat|t_stat|t-statistic)$")
-  n_samples <- c("^(N|sample_size|n_total|TotalSampleSize|SS)$")
+  n_samples <- c("^(N|n_complete_samples|sample_size|n_total|TotalSampleSize|SS)$")
   
   #If a column presents rsID, change the column name for rsID
   colnames(data) <- ifelse(apply(head(data, 50), 2, function(col) { 
@@ -88,6 +88,7 @@ if (nrow(gwas) == 0) {
 # If it is necessary, calculate SE
 if (!("se" %in% colnames(gwas))) {
   if ("z" %in% colname(gwas)) {
+    gwas$z <- as.numeric(gwas$z)
     gwas$se <- gwas$beta / gwas$z
   } else {
     gwas$se <- 0
@@ -96,6 +97,7 @@ if (!("se" %in% colnames(gwas))) {
 
 # If is necessary, calculate Z
 if (!("z" %in% colnames(gwas)) && "se" %in% colnames(gwas) && "se" != 0) {
+  gwas$se <- as.numeric(gwas$se)
   gwas$z <- gwas$beta / gwas$se
 }
 

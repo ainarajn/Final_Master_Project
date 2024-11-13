@@ -13,7 +13,7 @@ files <- commandArgs(trailingOnly = TRUE)
 vcf <- files[3]
 maxp <- as.numeric(files[4])
 ref_effect <- as.logical(files[5]) # REVIEW
-hapmap3 <- fread(files[6]) # REVIEW
+hapmap3 <- files[6] # REVIEW
 
 #Function to load GWAS according extension
 load_GWAS <- function(data) {

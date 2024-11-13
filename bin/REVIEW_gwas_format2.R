@@ -33,9 +33,9 @@ load_GWAS <- function(data) {
 }
 
 #Load GWAS
-gwas_name <- readLines(files[1])
+gwas_name <- read.delim(files[1], header = FALSE)
 gwas_dir <- files[2]
-gwas_path <- paste0(gwas_dir, "/", gwas_name)
+gwas_path <- paste0(gwas_dir, "/", gwas_name[1])
 gwas <- load_GWAS(gwas_path)
 
 # Function to change header

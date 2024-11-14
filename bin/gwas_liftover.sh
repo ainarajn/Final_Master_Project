@@ -10,39 +10,42 @@ GWAS=$(cat ${1})
 #Define input directory
 INDIR=$2
 
+#Define genome liftover
+GENOME=$3
+
 #Define output directory
-OUTDIR="${INDIR}_hg38"
+OUTDIR=${INDIR}_${GENOME}
 
 # Create directory and if it already exists, the existing directory is used.
-mkdir -p "$OUTDIR"
+mkdir -p $OUTDIR
 
 #Define the final GWAS output file
-GWAS_OUTPUT="${OUTDIR}/${GWAS%.tsv}_hg38.tsv"
+GWAS_OUTPUT="${OUTDIR}/${GWAS%.tsv}_${GENOME}.tsv"
 
-
-# if [ -e "$GWAS_OUTPUT" ]; then
+if [ -e "$GWAS_OUTPUT" ]; then
     #Emit the expected output file
-#    echo "${GWAS%.tsv}_hg38.tsv" > ${GWAS%.tsv}_hg38.txt
+    echo "${GWAS%.tsv}_${GENOME}.tsv" > ${GWAS%.tsv}_${GENOME}.txt
 if [ ! -e "$GWAS_OUTPUT" ]; then
     #Define BED file obtained from the GWAS
     TEMP_BED=${GWAS%.tsv}.bed
     #Define LiftOver output file
     OUTPUT_LIFTOVER=${GWAS%.tsv}_lifted.bed
     #Define file with unlifted SNPs
-    UNLIFTED=${OUTDIR}/${GWAS%.tsv}_hg19_to_hg38_unlifted.txt
+    UNLIFTED=${OUTDIR}/${GWAS%.tsv}_${GENOME}_unlifted.txt
     #Specify the path to the LiftOver tool
-    LIFTOVER_TOOL=$3
+    LIFTOVER_TOOL="$4"
     #Specify the chain file for hg18 to hg19 conversion (needed for the liftOver tool to work)
-    CHAIN_FILE=$4
+    CHAIN_FILE="$5"
 
     #Create pseudo-BED file for the LiftOver tool to work
     awk 'BEGIN { OFS="\t" } 
     NR>1 {
-        chr = "chr" $7;
-        start = $8 - 1;
-        end = $8;
-        print chr, start, end, $1
-    }' ${INDIR}/${GWAS} > $TEMP_BED
+        chr = "chr" $9;
+        start = $10 - 1;
+        end = $10;
+        variant = $1;
+        print chr, start, end, variant
+    }' ${GWAS} > $TEMP_BED
 
     #Call the LiftOver tool
     "$LIFTOVER_TOOL" "$TEMP_BED" "$CHAIN_FILE" "$OUTPUT_LIFTOVER" "$UNLIFTED"
@@ -81,7 +84,11 @@ if [ ! -e "$GWAS_OUTPUT" ]; then
     NR>1 {
         # Only print the row if a mapping exists
         if ($1 in variant_map) {
-            $1 = variant_map[$1]
+            variant = variant_map[$1]
+            $1 = variant
+            split(variant, pos, ":");
+            $9 = pos[1];
+            $10 = pos[2];
             print $0
         }
     }
@@ -91,5 +98,5 @@ if [ ! -e "$GWAS_OUTPUT" ]; then
     rm "$temp_mapping_file" "$TEMP_BED" "$OUTPUT_LIFTOVER"
 
     #Emit the expected output file
-    #echo "${GWAS%.tsv}_hg38.tsv" > ${GWAS%.tsv}_hg38.txt
+    echo "${GWAS%.tsv}_hg38.tsv" > ${GWAS%.tsv}_hg38.txt
 fi

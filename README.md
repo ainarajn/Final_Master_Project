@@ -5,21 +5,25 @@ This file represents the structure of the Nextflow script. It is not perfectly a
   - GWAS\_List: txt file that contains the name of GWAS files (all the GWAS have to be previously downloaded).  
   - GWASdir: Path to the directory where the downloaded GWAS files are located. 
   - GWASdir\_hg38: Path to the directory
-  - genome = “hg19” (default) // “hg38” 
-  - analysis = “PALM” (default) // “JPALM” 
-  - Population. 
+  - genome = “hg19” (default) // Options: "hg19", "hg19tohg38", "hg38", "hg38tohg19" 
+  - analysis = “PALM” (default) // Options: "PALM", "JPALM" 
+  - ref_effect: TRUE (default). If beta effect is assigned to alt allele, change to FALSE. // Options: TRUE, FALSE
+  - HapMap3: file provided.
+  - HapMap3_hg38: file provided.
   - Relate\_SNP: rds file. If it is not provided, it will be created through a “helper pipeline” that we will try to incorporate in the pipeline.  
   - SNPdb: VCF file provided. 
-  - LDblock: bed file provided. 
+  - LDblock: bed file provided.
+  - LDblock_hg38: bed file provided. 
   - LiftOver\_Tool: provided. 
-  - LiftOver\_chain: provided. 
+  - LiftOver\_chain_hg19tohg38: provided.
+  - LiftOver\_chain_hg38tohg19: provided. 
   - Max\_pvalue = 5e-8 
   - Min\_LDblocks = 25 
   - N\_per\_batch = 10 
 
 # PROCESSES 
 
-## **Unlist** 
+## **Unlist** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 
@@ -35,7 +39,7 @@ This script takes the GWAS list and stores the name of each GWAS in a separate f
 
 **Script**: Unlist\_GWAS.sh
 
-## **GWAS\_format**  
+## **GWAS\_format** -  Successfully incoporated into the pipeline.
 
 **Script status:** REVIEW
 
@@ -48,15 +52,17 @@ This script currently handles txt, tsv, csv and vcf GWAS file types or gz/bgz ve
 1. GWAS\_{num} [Unlist Output] 
 2. GWASdir 
 3. SNPdb 
-4. Max\_pvalue 
+4. Max\_pvalue
+5. ref_effect
+6. HapMap3
 
 **Output**: 
 
-- format\_{GWAS}.tsv 
+- format\_{GWAS}.txt 
 
-**Script**: gwas\_format.R (There is a second script, REVIEW_gwas_format2.R, which includes additional inputs and needs to be reviewed and verified to ensure it functions correctly in order to assess which one is better.)
+**Script**: gwas\_format2.R
 
-## **LD\_blocks** 
+## **LD\_blocks** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 
@@ -74,7 +80,7 @@ It intends to add the LD\_block information in order to determine  if we continu
 
 **Script**: ldblock\_filter.R
 
-## **LiftOver** 
+## **LiftOver**
 
 **Script status:** DONE 
 

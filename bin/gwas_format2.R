@@ -15,8 +15,8 @@ suppressMessages(require(data.table))
 files <- commandArgs(trailingOnly = TRUE)
 vcf <- files[3]
 maxp <- as.numeric(files[4])
-ref_effect <- as.logical(files[5]) # REVIEW
-hapmap3 <- files[6] # REVIEW
+ref_effect <- as.logical(files[5])
+hapmap3 <- files[6]
 
 #Function to load GWAS according extension
 load_GWAS <- function(data) {
@@ -123,7 +123,7 @@ alleles_f <- function(data) { # REVIEW
                                            replacement = c("ref", "alt"),
                                            vectorize = FALSE, case_insensitive = TRUE)
   # If the parameter ref_effect is FALSE, swap the column names
-  if (!ref_effect) {
+  if (ref_effect == FALSE) {
     colnames(df)[which(colnames(df) == "ref")] <- "alt"
     colnames(df)[which(colnames(df) == "alt")] <- "ref"
 

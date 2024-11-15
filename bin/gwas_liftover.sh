@@ -45,7 +45,7 @@ else
         end = $10;
         variant = $1;
         print chr, start, end, variant
-    }' ${GWAS} > $TEMP_BED
+    }' ${INDIR}/${GWAS} > $TEMP_BED
 
     #Call the LiftOver tool
     "$LIFTOVER_TOOL" "$TEMP_BED" "$CHAIN_FILE" "$OUTPUT_LIFTOVER" "$UNLIFTED"

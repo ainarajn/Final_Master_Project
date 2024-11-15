@@ -77,7 +77,7 @@ It intends to add the LD\_block information in order to determine  if we continu
 
 **Script**: ldblock\_filter.R
 
-## **LiftOver**
+## **LiftOver** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 
@@ -98,7 +98,7 @@ It creates a BED-formatted file for each selected SNPs from the GWAS file. Then 
 
 **Script**: gwas\_liftover.sh 
 
-## **Obtain\_N\_Comparisons** 
+## **Obtain\_N\_Comparisons** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 

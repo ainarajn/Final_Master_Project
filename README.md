@@ -8,12 +8,12 @@ This file represents the structure of the Nextflow script. It is not perfectly a
   - genome = “hg19” (default) // Options: "hg19", "hg19tohg38", "hg38", "hg38tohg19" 
   - analysis = “PALM” (default) // Options: "PALM", "JPALM" 
   - ref_effect: TRUE (default). If beta effect is assigned to alt allele, change to FALSE. // Options: TRUE, FALSE
-  - HapMap3: file provided.
+  - HapMap3: files provided (one for hg19 and other for hg38).
   - Relate\_SNP: rds file. If it is not provided, it will be created through a “helper pipeline” that we will try to incorporate in the pipeline.  
   - SNPdb: VCF file provided. 
-  - LDblock: bed file provided.
+  - LDblock: bed file provided (one for hg19 and other for hg38).
   - LiftOver\_Tool: provided. 
-  - LiftOver\_chain: provided.
+  - LiftOver\_chain: provided (one for hg19tohg38 and other for hg38tohg19).
   - Max\_pvalue = 5e-8 
   - Min\_LDblocks = 25 
   - N\_per\_batch = 10 

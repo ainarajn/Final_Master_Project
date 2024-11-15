@@ -115,18 +115,22 @@ if (!("z" %in% colnames(gwas)) && "se" %in% colnames(gwas) && "se" != 0) {
 
 ################# REVIEW THE FUNCTIONS RELATED TO OBTAIN REF AND ALT ALLELES
 # Function for change header names in allele columns
-alleles_f <- function(data) { # REVIEW
-  ref <- c("^(ref|effect_allele|A1|allele1|allele_1|reference_allele|inc_allele|EA)$")
-  alt <- c("^(alt|other_allele|A2|allele2|allele_2|non_effect_allele|dec_allele|NEA)$")
+alleles_f <- function(data, ref_effect) { # REVIEW
+  beta_ref <- c("^(ref|effect_allele|A1|allele1|allele_1|reference_allele|inc_allele|EA)$")
+  beta_alt <- c("^(alt|other_allele|A2|allele2|allele_2|non_effect_allele|dec_allele|NEA)$")
   colnames(data) <- stri_replace_all_regex(colnames(data),
-                                           pattern = c(ref, alt),
+                                           pattern = c(beta_ref, beta_alt),
                                            replacement = c("ref", "alt"),
                                            vectorize = FALSE, case_insensitive = TRUE)
+  
   # If the parameter ref_effect is FALSE, swap the column names
-  if (ref_effect == FALSE) {
-    colnames(data)[which(colnames(data) == "ref")] <- "alt"
-    colnames(data)[which(colnames(data) == "alt")] <- "ref"
-
+  if (!ref_effect) {
+    ref_idx <- match("ref", colnames(data))
+    alt_idx <- match("alt", colnames(data))
+    colnames(data)[ref_idx] <- "alt"
+    colnames(data)[alt_idx] <- "ref"
+  }
+  
   return(data)
 }
 

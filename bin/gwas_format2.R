@@ -124,8 +124,8 @@ alleles_f <- function(data) { # REVIEW
                                            vectorize = FALSE, case_insensitive = TRUE)
   # If the parameter ref_effect is FALSE, swap the column names
   if (ref_effect == FALSE) {
-    colnames(df)[which(colnames(df) == "ref")] <- "alt"
-    colnames(df)[which(colnames(df) == "alt")] <- "ref"
+    colnames(data)[which(colnames(data) == "ref")] <- "alt"
+    colnames(data)[which(colnames(data) == "alt")] <- "ref"
 
   return(data)
 }

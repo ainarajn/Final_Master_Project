@@ -116,7 +116,7 @@ This script creates a file with the GWAS that have >=25 independent SNPs from al
 
 **Script**: n\_comparisons.sh 
 
-## **Obtain\_Pairs\_batch** 
+## **Obtain\_Pairs\_batch** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 

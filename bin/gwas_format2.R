@@ -147,7 +147,7 @@ if (file.exists(output_path)) {
   #################
   
   #Create function to add missing columns to the GWAS from SNPdb file
-  add_from_rsID <- function(gwas, SNPdb, missing_columns) {
+  add_from_rsID <- function(gwas, vcf, missing_columns) {
     #Load SNPdb
     SNPdb <- getFIX(read.vcfR(vcf))[, -c(6, 7)]
     #Filter SNPdb to obtain info about the variants from the GWAS
@@ -188,7 +188,7 @@ if (file.exists(output_path)) {
         gwas$pos <- split_variant[, 2]
         gwas$variant <- paste0(split_variant[, 1], ":", split_variant[, 2])
       } else if ("rsID" %in% colnames(gwas)) {
-        gwas <- add_from_rsID(gwas, SNPdb, missing_columns)
+        gwas <- add_from_rsID(gwas, vcf, missing_columns)
       }
     }
     gwas$pos <- as.numeric(gwas$pos)

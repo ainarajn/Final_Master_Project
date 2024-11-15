@@ -25,7 +25,7 @@ GWAS_OUTPUT="${OUTDIR}/${GWAS%.tsv}_${GENOME}.tsv"
 if [ -e "$GWAS_OUTPUT" ]; then
     #Emit the expected output file
     echo "${GWAS%.tsv}_${GENOME}.tsv" > ${GWAS%.tsv}_${GENOME}.txt
-if [ ! -e "$GWAS_OUTPUT" ]; then
+else
     #Define BED file obtained from the GWAS
     TEMP_BED=${GWAS%.tsv}.bed
     #Define LiftOver output file

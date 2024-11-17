@@ -150,9 +150,15 @@ if (file.exists(output_path)) {
   add_info_from_rsID <- function(gwas, vcf_dir, missing_columns) {
     #Initialize and empty data frame for the results
     SNPdb_info <- data.frame()
+
+    #Determine the chromosomes
+    if ("chr" %in% colnames(gwas)) {
+      chromosome <- unique(gwas$chr)
+    } else {
+      chromosome <- 1:22
+    }
     
     #Initialize a loop to go through all the VCF files
-    chromosome <- 1:22
     for (i in chromosome) {
       #Determine file path for every chromosome
       vcf_files = paste0(vcf_dir,"/ALL.chr",chromosome,".phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz")

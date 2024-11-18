@@ -5,27 +5,15 @@
 
 # Set the input as the first argument passed to the script
 INPUT=$1
-#Define the max p-value
-MAXP=$2
-#Degine genome version
-ANALYSIS="$4"
+
 # Create a temporary file
 TMP=TMP.txt
 
 # Remove the headers
-tail -n +2 "$INPUT" | \
-# Trim SNPs by maximum p-value. This is incredibly helpful to
-# avoid unnecessary sampling branch lengths and inferring SNPs
-# likelihoods that will not be used later on. Keep those with
-# p-val <= 5e-8.
-if [[ "$ANALYSIS" == "JPALM" ]]; then
-    awk -F'\t' -v maxp="$MAXP" '($10 <= maxp) || ($15 <= maxp)' > "$TMP"
-else
-    awk -F'\t' -v maxp="$MAXP" '($10 <= maxp)' > "$TMP"
-fi
+tail -n +2 "$INPUT" > "$TMP"
 
 # Initialize batch size and counter
-batch_size=$3
+batch_size=$2
 batch_counter=0
 batch_number=1
 

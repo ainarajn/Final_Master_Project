@@ -176,7 +176,7 @@ It is necessary: <https://github.com/bulik/ldsc>
 
 **Script**: genetic\_correlation\_batch\_test.sh
 
-## **SNP\_selection** 
+## **SNP\_selection** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE 
 
@@ -197,7 +197,7 @@ This script  intends to intersect the filtered GWAS SNPs with the SNPs present i
 
 **Script**: snp\_selection.R 
 
-## **SNP\_selection\_JPALM** 
+## **SNP\_selection\_JPALM**
 
 **Script status:** DONE 
 
@@ -240,7 +240,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 **Script**: snp\_selection\_jpalm\_hg38.R
 
-## **Merge\_SNPs** 
+## **Merge\_SNPs** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE
 
@@ -254,7 +254,7 @@ This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 
 **Script**: merge\_SNPs.sh
 
-## **Trim\_SNP** 
+## **Trim\_SNP** -  Successfully incoporated into the pipeline.
 
 **Script status:** DONE
 
@@ -263,9 +263,7 @@ This script not only trims SNPs by its p-value but  also separates each SNP so t
 **Input**: 
 
 1. merged\_SNPs.tsv [Merge\_SNPs Output] 
-2. Max\_pvalue 
-3. N\_per\_batch 
-4. analysis 
+2. N\_per\_batch 
 
 **Output**: 
 

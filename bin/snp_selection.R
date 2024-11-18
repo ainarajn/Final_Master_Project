@@ -3,17 +3,19 @@
 #This script intends to intersect the filtered GWAS SNPs with the SNPs present in
 #Relate. After that, it only retains the SNP with the highest p-value per LD block
 
+#Suppress only automatic warnings from R
+options(warn = -1)
+
 # Packages
-require(dplyr)
-require(stringr)
-require(tidyverse)
-require(data.table)
+suppressMessages(require(dplyr))
+suppressMessages(require(stringr))
+suppressMessages(require(tidyverse))
+suppressMessages(require(data.table))
 
 # Put the arguments passed to the script into a vector
 files <- commandArgs(trailingOnly = TRUE)
 relate <- readRDS(files[1])
-#gwas_name = readLines(files[2]) # If ouputs are in txt file
-gwas_name <- files[2]
+gwas_name <- readLines(files[2])
 gwasdir <- files[3]
 gwas_path <- paste0(gwasdir, "/", gwas_name)
 gwas <- fread(file = gwas_path, header = TRUE, sep = "\t")

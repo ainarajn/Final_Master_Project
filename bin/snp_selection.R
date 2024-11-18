@@ -20,6 +20,13 @@ gwasdir <- files[3]
 gwas_path <- paste0(gwasdir, "/", gwas_name)
 gwas <- fread(file = gwas_path, header = TRUE, sep = "\t")
 
+# Discard chromosome and position columns in GWAS file (it is provided by relate, so we avoid duplicated)
+gwas$chr <- NULL
+gwas$pos <- NULL
+
+# Discard rsID columns in GWAS file (it is not necessary forward)
+gwas$rsID <- NULL
+
 # Intersect the selection statistics with the GWAS by common "variant" column
 relate_gwas <- inner_join(relate, gwas, by = "variant")
 

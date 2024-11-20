@@ -187,7 +187,6 @@ This script  intends to intersect the filtered GWAS SNPs with the SNPs present i
 1. Relate\_SNP 
 2. {GWAS}\_format. tsv / {GWAS}\_format \_hg38.tsv [GWAS\_format / LiftOver Output] 
 3. GWASdir 
-4. Max\_pvalue 
 
 **Output**: 
 

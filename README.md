@@ -16,7 +16,7 @@
   - Min\_LDblocks = 25 
   - N\_per\_batch = 10 
 
-# PROCESSES 
+# Processes 
 
 - **Unlist**: This script takes the GWAS list and stores the name of each GWAS in a separate file. This allows Nextflow to parallelize the following processes. 
 - **GWAS\_format**: This script currently handles txt, tsv, csv and vcf GWAS file types or gz/bgz versions of these file types. It  makes  the  GWAS  input  more  flexible  in  order  to  obtain  as  output  the  GWAS  with  the information of interest  for downstream analysis  and an established format. In addition, we select the SNPs from chr1:22 and with a p-value below the maxim p-value (Max\_pvalue). 

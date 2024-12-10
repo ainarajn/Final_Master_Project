@@ -11,7 +11,7 @@ params.ref_effect = true
 params.population = "GCAT"
 params.Relate_SNPs = "$projectDir/gcat/relate_snps_${params.population}.rds"
 
-params.VCFdir = "$projectDir/test/test_hg38"
+params.VCFdir = "/gpfs/projects/lab_dcomas/1000genomes_phase3_dcomas/vcf"
 params.Hapmap3 = (params.genome in ["hg19", "hg19tohg38"]) ? "$projectDir/gcat/ldscore/hm3_SNPs_variant_id.tsv" : 
                  (params.genome in ["hg38", "hg38tohg19"]) ? "$projectDir/gcat/ldscore/hm3_SNPs_variant_id_hg38.tsv" : null
 params.LDblocks = (params.genome in ["hg19", "hg19tohg38"]) ? "$projectDir/gcat/ld_blocks.bed" : 

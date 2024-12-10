@@ -85,8 +85,6 @@ process LD_blocks {
     errorStrategy { task.exitStatus in 135..144 ? 'retry' : 'terminate' }
     maxRetries 3
 
-    //publishDir InterDir, mode: 'copy'
-
     input:
     path GWAS
     path GWASdir

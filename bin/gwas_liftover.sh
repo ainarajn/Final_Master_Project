@@ -43,7 +43,7 @@ else
     if [[ "$GENOME" == "hg19tohg38" ]]; then
         CHAIN_FILE="/homes/users/ajimenez/scratch/gcat/hg19ToHg38.over.chain"
     else
-        CHAIN_FILE="/homes/users/ajimenez/scratch/gcat/hg39ToHg19.over.chain"
+        CHAIN_FILE="/homes/users/ajimenez/scratch/gcat/hg38ToHg19.over.chain"
     fi
 
     #Create pseudo-BED file for the LiftOver tool to work

@@ -35,7 +35,7 @@ for ((i=0; i<${#filenames[@]}; i++)); do
         echo -e "${filenames[i]}\t${filenames[j]}" >> all_comparisons.txt
     done
 done
-cat all_comparisons.txt
+
 #Split the file with all comparisons 
 split --lines=10 --numeric-suffixes=1 --suffix-length=3 all_comparisons.txt comparison_batch_
 

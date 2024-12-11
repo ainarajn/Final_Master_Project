@@ -39,7 +39,7 @@ else
     #Specify the path to the LiftOver tool
     LIFTOVER_TOOL="/homes/users/ajimenez/scratch/gcat/liftOver"
 
-    #Specify the chain file for hg18 to hg19 conversion (needed for the liftOver tool to work)
+    #Specify the chain file for the genome conversion (needed for the liftOver tool to work)
     if [[ "$GENOME" == "hg19tohg38" ]]; then
         CHAIN_FILE="/homes/users/ajimenez/scratch/gcat/hg19ToHg38.over.chain"
     else
@@ -59,14 +59,13 @@ else
     #Call the LiftOver tool
     "$LIFTOVER_TOOL" "$TEMP_BED" "$CHAIN_FILE" "$OUTPUT_LIFTOVER" "$UNLIFTED"
 
-    #Add the new variant column, in hg38 format, as a new column to the OUPUT_LIFTOVER file.
+    #Add the new variant column as a new column to the OUPUT_LIFTOVER file.
     #Put the output in the TEMP_BED file (thus recycling it)
     awk 'BEGIN { OFS="\t" } { gsub("chr", "", $1); new_col = $1 ":" $3; print "chr"$1, $2, $3, $4, new_col }' $OUTPUT_LIFTOVER > $TEMP_BED
     #Add headers (just in case)
     sed -i '1ichr\tpos_start\tpos_end\told_variant\tnew_variant' $TEMP_BED
 
-    ##Change the old variant (in hg19) with the new variant (in hg38) in the GWAS file
-
+    #Change the old variant with the new variant in the GWAS file
     #Create a temporary file to store the mappings from old_variant to new_variant
     temp_mapping_file=$(mktemp)
 

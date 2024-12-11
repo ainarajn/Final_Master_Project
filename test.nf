@@ -5,11 +5,12 @@ nextflow.enable.dsl=2
 //Define parameters
 params.genome = "hg19" //Options: hg19, hg19tohg38, hg38, hg38tohg19
 params.analysis = "JPALM" //Options: PALM, JPALM
-params.GWAS_list = "/homes/users/ajimenez/scratch/prueba/lista_gwas.txt"
-params.GWASdir = "/homes/users/ajimenez/scratch/prueba"
+params.GWAS_list = "/homes/users/ajimenez/scratch/test/lista_gwas.txt"
+params.GWASdir = "/homes/users/ajimenez/scratch/test"
 params.ref_effect = true
 params.population = "GCAT"
-params.Relate_SNPs = "$projectDir/gcat/relate_snps_${params.population}.rds"
+params.Relate_SNPs = (params.genome in ["hg19", "hg38tohg19"]) ? "$projectDir/gcat/relate_snps_${params.population}.rds" : 
+                     (params.genome in ["hg38", "hg19tohg38"]) ? "$projectDir/gcat/relate_snps_${params.population}_hg38.rds" : null
 
 params.VCFdir = "/gpfs/projects/lab_dcomas/1000genomes_phase3_dcomas/vcf"
 params.Hapmap3 = (params.genome in ["hg19", "hg19tohg38"]) ? "$projectDir/gcat/ldscore/hm3_SNPs_variant_id.tsv" : 

@@ -31,5 +31,5 @@
 - **Merge\_SNPs**: This process intents to merge all selected SNPs for all the GWAS inputs, then sorts them by variants and subsequently removes any duplicate entries.
 - **Trim\_SNP**: This script not only trims SNPs by its p-value but  also separates each SNP so that they can be processed in future steps. This is incredibly helpful to avoid unnecessary sampling branch lengths and inferring SNPs likelihoods that will not be used later on.
 - **Relate\_and\_SNP\_Likelihood**: This script iterates over each row of the provided batch of SNPs and implements Relate (https://github.com/MyersGroup/relate.git) to obtain the SNP likelihood.
-- **marginal\_PALM**: This script analyse individual traits and infer the direction and intensity of selection. **Conditions**: *PALM* analysis.
-- **joint\_PALM**: This script analyse two genetically correlated traits and infer the direction and intensity of selection. **Conditions**: *JPALM* analysis.
+- **marginal\_PALM**: This script implements PALM (https://github.com/andersonwinkler/PALM.git) to analyse individual traits and infer the direction and intensity of selection. **Conditions**: *PALM* analysis.
+- **joint\_PALM**: This script implements joint PALM (implements PALM (https://github.com/andersonwinkler/PALM.git) to analyse two genetically correlated traits and infer the direction and intensity of selection. **Conditions**: *JPALM* analysis.

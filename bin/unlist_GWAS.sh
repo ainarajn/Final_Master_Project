@@ -13,4 +13,4 @@ set -u
 gwas_list=$1
 
 #Create separate text files for each gwas
-awk '{print > ("GWAS_" NR)}' "$gwas_list"
+awk 'NR > 1 {print > ("GWAS_" NR-1)}' "$gwas_list"

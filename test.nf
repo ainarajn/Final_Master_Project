@@ -5,9 +5,8 @@ nextflow.enable.dsl=2
 //Define parameters
 params.genome = "hg19" //Options: hg19, hg19tohg38, hg38, hg38tohg19
 params.analysis = "JPALM" //Options: PALM, JPALM
-params.GWAS_list = "/homes/users/ajimenez/scratch/test/lista_gwas.txt"
-params.GWASdir = "/homes/users/ajimenez/scratch/test"
-params.ref_effect = true
+params.GWAS_list = "/homes/users/ajimenez/scratch/lista.txt"
+params.GWASdir = "/homes/users/ajimenez/scratch/gwas_tfm"
 params.population = "GCAT"
 params.Relate_SNPs = (params.genome in ["hg19", "hg38tohg19"]) ? "$projectDir/gcat/relate_snps_${params.population}.rds" : 
                      (params.genome in ["hg38", "hg19tohg38"]) ? "$projectDir/gcat/relate_snps_${params.population}_hg38.rds" : null
@@ -23,7 +22,7 @@ params.N_per_batch = 10
 params.min_SI_SNPs = 25
 
 log.info """\
-    G W A S   ${params.analysis}  ANALYSIS -  N F   P I P E L I N E
+    G W A S  ${params.analysis}  ANALYSIS -  N F   P I P E L I N E
     =================================================================
     Genome	    : ${params.genome}
     Population	: ${params.population}
@@ -57,7 +56,7 @@ process GWAS_format {
     module = 'R/4.2.0-foss-2021b'
     clusterOptions = '--partition=haswell'
 
-    memory { 8.GB * task.attempt }
+    memory { 16.GB * task.attempt }
     errorStrategy { task.exitStatus in 135..144 ? 'retry' : 'terminate' }
     maxRetries 8
 
@@ -65,7 +64,6 @@ process GWAS_format {
     path GWAS
     path GWASdir
     path VCFdir
-    val ref_effect
     path Hapmap3
 
     output:
@@ -73,7 +71,7 @@ process GWAS_format {
 
     script:
     """
-    gwas_format.R ${GWAS} ${GWASdir} ${VCFdir} ${ref_effect} ${Hapmap3} 
+    gwas_format.R ${GWAS} ${GWASdir} ${VCFdir} ${Hapmap3} 
     """
 
 }
@@ -82,7 +80,7 @@ process LD_blocks {
     module = 'R/4.2.0-foss-2021b'
     clusterOptions = '--partition=haswell'
 
-    memory { 4.GB * task.attempt }
+    memory { 8.GB * task.attempt }
     errorStrategy { task.exitStatus in 135..144 ? 'retry' : 'terminate' }
     maxRetries 3
 
@@ -244,7 +242,7 @@ process SelectSNPs {
     path '*_selected_SNPs.tsv'
 
     when:
-    params.analysis == "PALM" &&
+    params.analysis == "PALM" && 
     (
         (params.genome in ["hg19", "hg38"] && 
         GWAS.exists() && 
@@ -280,7 +278,6 @@ process SelectSNPs_JPALM {
     path '*-*_selected_SNPs.tsv'
 
     when:
-    
     params.analysis == "JPALM" &&
     params.genome in ["hg19", "hg38"] && 
     rg.exists()  &&
@@ -317,7 +314,7 @@ process SelectSNPs_JPALM_lifted {
 
     when:
     params.analysis == "JPALM" &&
-    params.genome in ["hg19tohg38", "hg38tohg19"] && 
+    params.genome in ["hg19tohg38", "hg38tohg19"] &&
     rg.exists()  &&
         rg.name.tokenize('-+').size() == 4 &&
         Math.abs(Float.parseFloat(rg.name.tokenize('-+')[2])) > 0.2 &&
@@ -325,7 +322,7 @@ process SelectSNPs_JPALM_lifted {
 
     script:
     """
-    snp_selection_jpalm_hg38.R ${rg} ${relate_SNPs} ${GWAS_dir} ${MaxPval} ${genome}
+    snp_selection_jpalm_lift.R ${rg} ${relate_SNPs} ${GWAS_dir} ${MaxPval} ${genome}
     """
 }
 
@@ -451,7 +448,7 @@ process Apply_JPALM {
 
 workflow {
     Unlist_GWAS_ch = Unlist_GWAS(params.GWAS_list)
-    GWAS_format_ch = GWAS_format(Unlist_GWAS_ch.flatten(), params.GWASdir, params.VCFdir, params.ref_effect, params.Hapmap3)
+    GWAS_format_ch = GWAS_format(Unlist_GWAS_ch.flatten(), params.GWASdir, params.VCFdir, params.Hapmap3)
     LDblocks_ch = LD_blocks(GWAS_format_ch, params.GWASdir, params.LDblocks, params.maxp)
     Lifted_GWAS_ch = LiftOver(LDblocks_ch, params.GWASdir, params.genome)
     GWAS_N_ch = Obtain_N_Comparisons(LDblocks_ch.collect())

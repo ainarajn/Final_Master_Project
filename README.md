@@ -2,9 +2,8 @@
   
   - genome = “hg19” (default) // Options: "hg19", "hg19tohg38", "hg38", "hg38tohg19" 
   - analysis = “PALM” (default) // Options: "PALM", "JPALM" 
-  - GWAS\_List: txt file that contains the name of GWAS files (all the GWAS have to be previously downloaded).  
+  - GWAS\_List: txt file that contains the name of GWAS files (all the GWAS have to be previously downloaded), number of samples and parameter ref_effect. 
   - GWASdir: Path to the directory where the downloaded GWAS files are located. 
-  - ref_effect: TRUE (default). If beta effect is assigned to alt allele, change to FALSE. // Options: TRUE, FALSE
   - population: population to analyse. In our case, GCAT.
   - Relate\_SNP: rds file provided by the user.
   

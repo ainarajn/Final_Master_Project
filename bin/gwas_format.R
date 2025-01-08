@@ -64,6 +64,8 @@ if (file.exists(output_path)) {
     n_samples <- c("^(N|n_complete_samples|sample_size|n_total|TotalSampleSize|SS)$")
     ref <- c("^(ref|reference_allele|ref_allele)$")
     alt <- c("^(alt|alternate_allele|alt_allele)$")
+    effect_allele <- c("^(effect_allele|A1|allele1|allele_1|inc_allele|EA)$")
+    non_effect_allele <- c("^(other_allele|A2|allele2|allele_2|non_effect_allele|dec_allele|NEA|allele0)$")
     
     #If a column presents rsID, change the column name for rsID
     colnames(data) <- ifelse(apply(head(data, 50), 2, function(col) { 
@@ -73,9 +75,11 @@ if (file.exists(output_path)) {
     #Change column names to the stablished format
     colnames(data) <- stri_replace_all_regex(colnames(data),
                                              pattern = c(variant, beta, se, z, ref, alt,
-                                                         pval, LP, chr, pos, n_samples),
+                                                         pval, LP, chr, pos, n_samples,
+                                                         effect_allele, non_effect_allele),
                                              replacement = c("variant", "beta", "se", "z", "ref", "alt",
-                                                             "pval", "LP", "chr", "pos", "n_samples"),
+                                                             "pval", "LP", "chr", "pos", "n_samples",
+                                                             "effect_allele", "non_effect_allele"),
                                              vectorize = FALSE, case_insensitive = TRUE)
     
     #Determine beta as a numeric variable
@@ -115,42 +119,40 @@ if (file.exists(output_path)) {
   
   #Function for change the header names in allele columns
   alleles_f <- function(data, ref_effect) {
-    if (!is.null(ref_effect)) {
-      beta_ref <- c("^(effect_allele|A1|allele1|allele_1|inc_allele|EA)$")
-      beta_alt <- c("^(other_allele|A2|allele2|allele_2|non_effect_allele|dec_allele|NEA|allele0)$")
-      colnames(data) <- stri_replace_all_regex(colnames(data),
-                                              pattern = c(beta_ref, beta_alt),
-                                              replacement = c("ref", "alt"),
-                                              vectorize = FALSE, case_insensitive = TRUE)
+    if (ref_effect == TRUE) {
+      
+      data$beta <- -data$beta
+      
+      if ("effect_allele" %in% colnames(data)) {
+        colnames(data)[match("effect_allele", colnames(data))] <- "ref"
+        colnames(data)[match("non_effect_allele", colnames(data))] <- "alt"
+        }
     
-      #If the parameter ref_effect is FALSE, swap the column names
-      if (ref_effect == FALSE) {
-        ref_i <- match("ref", colnames(data))
-        alt_i <- match("alt", colnames(data))
-        colnames(data)[ref_i] <- "alt"
-        colnames(data)[alt_i] <- "ref"
-      } else {
-        #Assign beta to the ALT allele
-        data$beta <- -data$beta
-      }
+    } else {
+      
+      if ("effect_allele" %in% colnames(data)) {
+        colnames(data)[match("effect_allele", colnames(data))] <- "alt"
+        colnames(data)[match("non_effect_allele", colnames(data))] <- "ref"
+        }
     }
-    return(data)
+  
+  return(data)
   }
   
   #Determine Reference and Alternative alleles
-  ##There are GWAS CATALOG cases where is effect/non_effect columns and a ref allele column, therefore based on
+  ##There are GWAS  files where there is effect/non_effect columns and a ref allele column, therefore based on
   ##these columns we extract ref and alt allele columns.
-  if ("effect_allele" %in% colnames(gwas) & ("ref" %in% colnames(gwas) | "REF" %in% colnames(gwas))) {
+  if ("effect_allele" %in% colnames(gwas) & ("ref" %in% colnames(gwas))) {
     gwas$ref <- ifelse(
       gwas$ref == "EA", gwas$effect_allele,
-      ifelse(gwas$ref == "OA", gwas$other_allele,
+      ifelse(gwas$ref == "OA", gwas$non_effect_allele,
         ifelse(gwas$ref %in% c("A", "C", "G", "T"), gwas$ref, NA)))
     
     gwas$alt <- ifelse(
-      gwas$ref == "EA", gwas$other_allele,
+      gwas$ref == "EA", gwas$non_effect_allele,
         ifelse(gwas$ref == "OA", gwas$effect_allele,
           ifelse(gwas$ref %in% c("A", "C", "G", "T"),
-            ifelse(gwas$effect_allele == gwas$ref, gwas$other_allele, gwas$effect_allele), NA)))
+            ifelse(gwas$effect_allele == gwas$ref, gwas$non_effect_allele, gwas$effect_allele), NA)))
   
     #Assign beta to the ALT allele
     gwas$beta <- ifelse(gwas$ref == gwas$effect_allele, -gwas$beta, gwas$beta)
@@ -249,7 +251,7 @@ if (file.exists(output_path)) {
 
     if ("variant" %in% colnames(gwas)) {
       gwas$variant <- ifelse(
-        grepl("^([0-9]):[0-9]+:[A-Za-z]+:[A-Za-z]+$", gwas$variant), 
+        grepl("^(1[0-9]|2[0-2]|[1-9]):[0-9]+:[A-Za-z]+:[A-Za-z]+$", gwas$variant), 
         sub(":([A-Za-z]+:[A-Za-z]+)$", "", gwas$variant), gwas$variant)
     }
     

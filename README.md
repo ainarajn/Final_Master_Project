@@ -1,4 +1,20 @@
-# Pipeline parameters 
+Welcome! 
+
+This repository contains the scripts and the pipeline developed and used for my master's thesis, titled "A novel pipeline to detect direct and conditional polygenic selection". The work presented here focuses on omic data analysis and includes a pipeline designed to automate polygenic selection analyses for virtually any trait to which a GWAS has been performed.
+
+It should be noted that currently, the repository cannot be replicated, as all created directories’ paths are set in my cluster working directory.
+
+# Reposity structure
+The scripts are organized into the following directories:
+  - bin: Contains the scripts used in the Nextflow processes.
+  - modified_scripts: Contains scripts originally obtained from other GitHub repositories (referenced in section 3.6 of the thesis report) that were modified by the Evolutionary Population Genetics Lab.
+  - preprocess_data: Includes the script used to incorporate the reference allele column in GWAS summary statistics that required preprocessing (the script requires modification for each GWAS dataset).
+
+# Overview of the pipeline's workflow structure
+Detailed explanation in section 4.1.2. of the thesis report.
+<img width="376" alt="image" src="https://github.com/user-attachments/assets/f30f5fe2-7963-44c4-a4bf-10247067deb8" />
+
+
   
   - genome = “hg19” (default) // Options: "hg19", "hg19tohg38", "hg38", "hg38tohg19" 
   - analysis = “PALM” (default) // Options: "PALM", "JPALM" 

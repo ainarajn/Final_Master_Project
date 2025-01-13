@@ -249,6 +249,7 @@ if (file.exists(output_path)) {
     gwas$alt <- as.character(gwas$alt)
     gwas <- gwas[nchar(gwas$ref) == 1 & nchar(gwas$alt) == 1, ]
 
+    #If the variant still maintains the structure "chr:pos:ref:alt", remove the allele information (:ref:alt) to retain only the "chr:pos" structure.
     if ("variant" %in% colnames(gwas)) {
       gwas$variant <- ifelse(
         grepl("^(1[0-9]|2[0-2]|[1-9]):[0-9]+:[A-Za-z]+:[A-Za-z]+$", gwas$variant), 
